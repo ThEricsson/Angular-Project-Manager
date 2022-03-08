@@ -1,0 +1,9 @@
+.custom-home-bgimg {
+  background-image: url("../assets/img/wallpaper.jpg");
+  background-size: 100% 100%;
+  padding-bottom: 4.5em;
+}
+
+.custom-home-box {
+  min-height: 100vh;
+}

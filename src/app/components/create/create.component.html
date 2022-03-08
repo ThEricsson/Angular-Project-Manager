@@ -1,0 +1,51 @@
+<h2>Crear Projecte</h2>
+<hr>
+<p *ngIf="creat" style="color: green;">Projecte creat correctament, pots veure'l <a href="">aquí</a></p>
+<p *ngIf="error" style="color: red;">ERROR: No s'ha pogut crear el projecte</p>
+<form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+  <label for="nom">Nom: </label><br>
+  <input class="form-control" type="text" name="name" #name="ngModel" [(ngModel)]="project.name" required
+    pattern="[a-zA-Z0-9 ]+"><br>
+  <span *ngIf="name.touched && !name.valid">
+    <p style="color:red;">Aquest paràmetre és obligatori.</p>
+  </span>
+  <br>
+  <label for="descripcio">Descripcio: </label><br>
+  <input class="form-control" type="text" name="descripcio" #descripcio="ngModel" [(ngModel)]="project.description"
+    required pattern="[a-zA-Z0-9 ]+"><br>
+  <span *ngIf="descripcio.touched && !descripcio.valid">
+    <p style="color:red;">Aquest paràmetre és obligatori.</p>
+  </span>
+  <br>
+  <label for="category">Categoria: </label><br>
+  <input class="form-control" type="text" name="category" #category="ngModel" [(ngModel)]="project.category" required
+    pattern="[a-zA-Z0-9 ]+"><br>
+  <span *ngIf="category.touched && !category.valid">
+    <p style="color:red;">Aquest paràmetre és obligatori.</p>
+  </span>
+  <br>
+  <label for="year">Any: </label><br>
+  <input class="form-control" type="text" name="year" #year="ngModel" [(ngModel)]="project.year" required
+    pattern="[0-9]+"><br>
+  <span *ngIf="year.touched && !year.valid">
+    <p style="color:red;">Aquest paràmetre és obligatori, i només poden ser números.</p>
+  </span>
+  <br>
+  <label for="langs">Llenguatges Utilitzats: </label><br>
+  <select class="form-control" type="text" name="langs" #langs="ngModel" [(ngModel)]="project.langs" multiple required>
+    <option value="typescript">TypeScript</option>
+    <option value="javascript">JavaScript</option>
+    <option value="python">Python</option>
+    <option value="php">PhP</option>
+    <option value="angular">Angular</option>
+  </select><br>
+  <span *ngIf="langs.touched && !langs.valid">
+    <p style="color:red;">Aquest paràmetre és obligatori.</p>
+  </span>
+  <br>
+  <label for="image" class="form-label">Imatge del projecte:</label>
+  <input class="form-control" type="file" id="image" name="image" placeholder="Pujar imatge"
+    (change)="fileChangeEvent($event)">
+  <br>
+  <input class="btn btn-primary" type="submit" name="Enviar" [disabled]="!formData.form.valid">
+</form>
