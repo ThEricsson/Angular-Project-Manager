@@ -17,8 +17,7 @@ export class UploadService{
 
             var xhr = new XMLHttpRequest();
 
-
-            for (var i=0; i<FileSystem.length; i++) {
+            for (var i=0; i<files.length; i++) {
                 formData.append(name, files[i], files[i].name);
             }
 
@@ -30,9 +29,9 @@ export class UploadService{
                         reject(xhr.response)
                     }
                 }
-                xhr.open('POST', url,true)
-                xhr.send(formData)
             }
+            xhr.open('POST', url,true)
+            xhr.send(formData)
         })
     }
 }

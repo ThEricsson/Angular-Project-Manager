@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project';
+import { Global } from 'src/app/services/global';
 import { ProjectService } from 'src/app/services/project.service';
+import { UploadService } from 'src/app/services/upload.service';
+
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
-  providers: [ProjectService]
+  providers: [
+    ProjectService,
+    UploadService
+  ]
 })
 export class CreateComponent implements OnInit {
 
@@ -18,7 +24,8 @@ export class CreateComponent implements OnInit {
   public filesToUpload: any
 
   constructor(
-    private _projectService: ProjectService
+    private _projectService: ProjectService,
+    private _uploadService: UploadService
   ) {
       this.title = "Crear Projecte";
       this.project = new Project('','','','',2022,[''],'');
@@ -32,8 +39,23 @@ export class CreateComponent implements OnInit {
 
     this._projectService.saveProject(this.project).subscribe(
       response =>{
-        this.error = false
+
         this.projecte_desat = response
+        if (this.projecte_desat.project._id != ""){
+          console.log(this.filesToUpload)
+          this._uploadService.makeFileRequest(
+            Global.url+'upload-image/'+this.projecte_desat.project._id,
+            [],
+            this.filesToUpload,
+            'image')
+            .then((result:any) => {
+              console.log(result)
+              console.log(`URL: ${Global.url+'upload-image/'+this.projecte_desat.project._id}`)
+            });
+            
+          form.reset();
+        }
+        this.error = false
         form.reset()
         this.creat = true
       },
