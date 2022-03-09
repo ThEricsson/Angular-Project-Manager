@@ -32,17 +32,16 @@ export class CreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getProjects()
   }
 
   onSubmit(form: any): any{
-    console.log(this.project)
 
     this._projectService.saveProject(this.project).subscribe(
       response =>{
 
         this.projecte_desat = response
         if (this.projecte_desat.project._id != ""){
-          console.log(this.filesToUpload)
           this._uploadService.makeFileRequest(
             Global.url+'upload-image/'+this.projecte_desat.project._id,
             [],
@@ -50,7 +49,6 @@ export class CreateComponent implements OnInit {
             'image')
             .then((result:any) => {
               console.log(result)
-              console.log(`URL: ${Global.url+'upload-image/'+this.projecte_desat.project._id}`)
             });
             
           form.reset();
@@ -71,8 +69,18 @@ export class CreateComponent implements OnInit {
   fileChangeEvent(fileInput: any){
     console.log(fileInput)
     
-
     this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+
+  getProjects(){
+    this._projectService.getProjects().subscribe(
+      result=>{
+        console.log(result)
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
 }

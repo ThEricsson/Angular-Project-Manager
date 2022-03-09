@@ -24,9 +24,15 @@ export class ProjectService{
         let params = JSON.stringify(project)
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
 
-        console.log(this.url+'save-project')
-
         return this._http.post(this.url+'save-project', params, {headers: headers})
+    }
+
+    getProjects(): Observable<any>{
+        return this._http.get(this.url+'projects')
+    }
+
+    getProject(id: string): Observable<any>{
+        return this._http.get(this.url+'project/'+id)
     }
 
 }

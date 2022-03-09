@@ -1,1 +1,12 @@
-<p>projects works!</p>
+<h2>Llistat de projectes</h2>
+<hr>
+<div class="d-flex flex-wrap justify-content-around">
+  <div class="card m-1" style="width: 18rem;" *ngFor="let project of projects">
+    <img src="{{url+'get-image/'+project.image}}" class="card-img-top">
+    <div class=" card-body">
+      <h5 class="card-title">{{project.name}}</h5>
+      <p class="card-text">{{project.category}}</p>
+      <a href="{{'/detail/'+project._id}}" class="btn btn-primary">Anar al projecte</a>
+    </div>
+  </div>
+</div>
