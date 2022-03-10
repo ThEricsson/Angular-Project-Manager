@@ -4,27 +4,34 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Project } from 'src/app/models/project';
 import { global } from '@angular/compiler/src/util';
 import { Global } from 'src/app/services/global';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css'],
+  selector: 'app-edit',
+  templateUrl: '../create/create.component.html',
+  styleUrls: ['./edit.component.css'],
   providers: [
-    ProjectService
+    ProjectService,
+    UploadService
   ]
 })
-export class DetailComponent implements OnInit {
-
-  public projecte: Project = new Project('','','','',0,[''],'')
+export class EditComponent implements OnInit {
+  public project: Project = new Project('','','','',0,[''],'')
   public id!: any;
   public url: string = Global.url
   public llenguatges: string = "";
-  public delAlert: boolean = false;
+  public title: string;
+  public projecte_desat: any;
+  public creat: boolean = false
+  public error: boolean = false
+  public filesToUpload: any
+  public update: boolean = true;
 
   constructor(
     private _projectService: ProjectService,
     private _route: ActivatedRoute,
   ) { 
+    this.title = 'Editar component'
   }
 
   ngOnInit(): void {
@@ -41,8 +48,8 @@ export class DetailComponent implements OnInit {
 
     this._projectService.getProject(id).subscribe(
       result => {
-        this.projecte = result['project']
-        this.projecte.langs.forEach(lang => {
+        this.project = result['project']
+        this.project.langs.forEach(lang => {
           this.llenguatges += lang+" "         
         });
       },
@@ -52,18 +59,14 @@ export class DetailComponent implements OnInit {
     )
   }
 
-  onDelete(): void
-  {
-    this._projectService.deleteProject(this.id).subscribe(
-      result=>{
-        console.log(result)
-        window.location.href = '/projects';
-      },
-      error=>{
-        console.log(error)
-      }
-    )
+  fileChangeEvent(fileInput: any){
+    console.log(fileInput)
     
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+
+  onSubmit(form: any): void{
+
   }
 
 }

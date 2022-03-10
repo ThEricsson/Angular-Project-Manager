@@ -1,4 +1,4 @@
-<h2>Crear Projecte</h2>
+<h2>{{title}}</h2>
 <hr>
 <p *ngIf="creat" style="color: green;">Projecte creat correctament, pots veure'l <a href="">aquí</a></p>
 <p *ngIf="error" style="color: red;">ERROR: No s'ha pogut crear el projecte</p>
@@ -43,9 +43,9 @@
     <p style="color:red;">Aquest paràmetre és obligatori.</p>
   </span>
   <br>
-  <label for="image" class="form-label">Imatge del projecte:</label>
-  <input class="form-control" type="file" id="image" name="image" placeholder="Pujar imatge"
-    (change)="fileChangeEvent($event)">
+  <label for="image" class="form-label">Imatge del projecte:</label><br>
+  <img src="{{url+'get-image/'+project.image}}" *ngIf="update" width="350vw" class="mb-1">
+  <input class="form-control" type="file" name="image" placeholder="Pujar imatge" (change)="fileChangeEvent($event)">
   <br>
-  <input class="btn btn-primary" type="submit" name="Enviar" [disabled]="!formData.form.valid">
+  <input class="btn btn-success" type="submit" name="Enviar" [disabled]="!formData.form.valid">
 </form>

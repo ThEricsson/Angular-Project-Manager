@@ -22,6 +22,8 @@ export class CreateComponent implements OnInit {
   public creat: boolean = false
   public error: boolean = false
   public filesToUpload: any
+  public update: boolean = false
+  public url: string = Global.url
 
   constructor(
     private _projectService: ProjectService,

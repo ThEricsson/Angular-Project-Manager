@@ -1,1 +1,23 @@
-<p>detail works!</p>
+<h2>Detalls del projecte</h2>
+<hr>
+<div class="row">
+  <div class="col-4 custom-detail-image">
+    <img src="{{url+'get-image/'+projecte.image}}" width="350vw">
+  </div>
+  <div class="col-8">
+    <h3>{{projecte.name}}</h3>
+    <p class="fw-light">Data de creació: {{projecte.year}} | Llenguatge/s: {{llenguatges}}</p>
+    <hr>
+    <h5>Categoria: {{projecte.category}}</h5>
+    <p>{{projecte.description}}</p>
+    <hr width="300vw">
+    <div *ngIf="delAlert">
+      <p>Segur que vols eliminar el projecte?</p>
+      <button class="btn btn-success" (click)="delAlert = false">Cancelar</button>
+      <button class="btn btn-danger ms-1" (click)="onDelete()">ELIMINAR!</button>
+    </div>
+    <div *ngIf="!delAlert">
+      <a class="btn btn-success" href="{{'/edit/'+projecte._id}}">Editar</a>
+      <button class="btn btn-danger ms-1" (click)="delAlert = true">Eliminar</button>
+    </div>
+  </div>

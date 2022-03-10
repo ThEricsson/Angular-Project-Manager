@@ -35,4 +35,12 @@ export class ProjectService{
         return this._http.get(this.url+'project/'+id)
     }
 
+    deleteProject(id: string): Observable<any>{
+        return this._http.delete(this.url+'project/'+id)
+    }
+
+    updateProject(id: string): Observable<any>{
+        return this._http.put(this.url+''+id)
+    }
+
 }

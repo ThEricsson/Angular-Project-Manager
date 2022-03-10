@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DetailComponent } from './components/detail/detail.component';
     NavbarComponent,
     FooterComponent,
     DetailComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
