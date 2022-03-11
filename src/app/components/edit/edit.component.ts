@@ -30,6 +30,7 @@ export class EditComponent implements OnInit {
   constructor(
     private _projectService: ProjectService,
     private _route: ActivatedRoute,
+    private _uploadService: UploadService
   ) { 
     this.title = 'Editar component'
   }
@@ -44,7 +45,7 @@ export class EditComponent implements OnInit {
   }
 
   getProject(id: any): void
-  {//tienes que recojer el projecto del backend, diapo 29
+  {
 
     this._projectService.getProject(id).subscribe(
       result => {
@@ -66,7 +67,29 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(form: any): void{
+    this._projectService.updateProject(this.project._id,this.project).subscribe(
+      response =>{
 
+        this.projecte_desat = response
+        if (this.projecte_desat.project._id != ""){
+          this._uploadService.makeFileRequest(
+            Global.url+'upload-image/'+this.projecte_desat.project._id,
+            [],
+            this.filesToUpload,
+            'image')
+            .then((result:any) => {
+              console.log(result)
+              window.location.href = '/projects';
+            });
+        }
+        this.error = false
+      },
+      error => {
+        console.log(error)
+        this.error = true
+      }
+
+    )
   }
 
 }

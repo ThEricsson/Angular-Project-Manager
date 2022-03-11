@@ -38,9 +38,12 @@ export class ProjectService{
     deleteProject(id: string): Observable<any>{
         return this._http.delete(this.url+'project/'+id)
     }
+    
+    updateProject(id: string, project: Project): Observable<any>{
+        let body = JSON.stringify(project)
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
 
-    updateProject(id: string): Observable<any>{
-        return this._http.put(this.url+''+id)
+        return this._http.put(this.url+'project/'+id, body, {headers: headers})
     }
 
 }
