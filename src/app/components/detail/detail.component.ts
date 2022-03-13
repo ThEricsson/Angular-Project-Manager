@@ -27,6 +27,7 @@ export class DetailComponent implements OnInit {
   ) { 
   }
 
+  //A l'inici recollim les dades amb la funció getProject
   ngOnInit(): void {
 
     this._route.params.subscribe((params: Params) => {
@@ -36,8 +37,9 @@ export class DetailComponent implements OnInit {
     this.getProject(this.id)
   }
 
+  //Funció per recollir les dades per id, fent servir el servei ProjectService
   getProject(id: any): void
-  {//tienes que recojer el projecto del backend, diapo 29
+  {
 
     this._projectService.getProject(id).subscribe(
       result => {
@@ -52,6 +54,7 @@ export class DetailComponent implements OnInit {
     )
   }
 
+  //Funció que s'executarà en el moment en què l'usuari premi el botó d'eliminar
   onDelete(): void
   {
     this._projectService.deleteProject(this.id).subscribe(

@@ -19,13 +19,15 @@ export class EditComponent implements OnInit {
   public project: Project = new Project('','','','',0,[''],'')
   public id!: any;
   public url: string = Global.url
-  public llenguatges: string = "";
+  public llenguatgesUser: string = "";
   public title: string;
   public projecte_desat: any;
   public creat: boolean = false
   public error: boolean = false
   public filesToUpload: any
-  public update: boolean = true;
+  public update: boolean = true
+  public llenguatges: string[] = ["typescript", "javascript", "python", "php", "c", "java"]
+
 
   constructor(
     private _projectService: ProjectService,
@@ -35,8 +37,10 @@ export class EditComponent implements OnInit {
     this.title = 'Editar component'
   }
 
+  //A l'inici recollim les dades amb la funció getProject
   ngOnInit(): void {
 
+    //Agafem la "id" passada paer paràmetre
     this._route.params.subscribe((params: Params) => {
       this.id = params['id'];
     })    
@@ -46,12 +50,12 @@ export class EditComponent implements OnInit {
 
   getProject(id: any): void
   {
-
+    //Amb el servei ProjectService cerquem el projecte per id
     this._projectService.getProject(id).subscribe(
       result => {
         this.project = result['project']
         this.project.langs.forEach(lang => {
-          this.llenguatges += lang+" "         
+          this.llenguatgesUser += lang+" "         
         });
       },
       error => {
@@ -66,6 +70,8 @@ export class EditComponent implements OnInit {
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }
 
+  //En el moment en què l'usuari prem el botó per editar el projecte enviem les dades,
+// amb la funció updateProject del servei ProjectService
   onSubmit(form: any): void{
     this._projectService.updateProject(this.project._id,this.project).subscribe(
       response =>{

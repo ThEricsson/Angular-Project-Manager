@@ -1,3 +1,4 @@
+//Model projecte amb els seus atributs
 export class Project{
     constructor (
         public _id: string,

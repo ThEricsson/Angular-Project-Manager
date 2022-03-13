@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Global } from "./global";
 
+//Servei que envia les imatges al backend de node
+
 @Injectable()
 export class UploadService{
     public url: string;

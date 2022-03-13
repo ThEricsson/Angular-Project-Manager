@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit {
   public filesToUpload: any
   public update: boolean = false
   public url: string = Global.url
+  public llenguatges: string[] = ["typescript", "javascript", "python", "php", "c", "java"]
 
   constructor(
     private _projectService: ProjectService,
@@ -34,18 +35,19 @@ export class CreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getProjects()
   }
 
+  //Funció que s'executa en el moment que l'usuari prem el botó de crear projecte,
+  // gràcies al servei saveProject ens connectem al backend per guardar les dades i la imatge del projecte.
   onSubmit(form: any): any{
 
     this._projectService.saveProject(this.project).subscribe(
       response =>{
 
-        this.projecte_desat = response
-        if (this.projecte_desat.project._id != ""){
+        this.projecte_desat = response["project"]
+        if (this.projecte_desat._id != ""){
           this._uploadService.makeFileRequest(
-            Global.url+'upload-image/'+this.projecte_desat.project._id,
+            Global.url+'upload-image/'+this.projecte_desat._id,
             [],
             this.filesToUpload,
             'image')
@@ -68,21 +70,11 @@ export class CreateComponent implements OnInit {
     )
   }
 
+  //Funció que s'executa en el moment en el que l'usuari canvia l'arxiu de l'imput de les imatges
   fileChangeEvent(fileInput: any){
     console.log(fileInput)
     
     this.filesToUpload = <Array<File>>fileInput.target.files;
-  }
-
-  getProjects(){
-    this._projectService.getProjects().subscribe(
-      result=>{
-        console.log(result)
-      },
-      error => {
-        console.log(error)
-      }
-    )
   }
 
 }

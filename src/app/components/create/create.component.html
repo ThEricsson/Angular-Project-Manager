@@ -1,6 +1,7 @@
 <h2>{{title}}</h2>
 <hr>
-<p *ngIf="creat" style="color: green;">Projecte creat correctament, pots veure'l <a href="">aquí</a></p>
+<p *ngIf="creat" style="color: green;">Projecte creat correctament, pots veure'l <a
+    href="{{'/detail/'+projecte_desat._id}}">aquí</a></p>
 <p *ngIf="error" style="color: red;">ERROR: No s'ha pogut crear el projecte</p>
 <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
   <label for="nom">Nom: </label><br>
@@ -33,11 +34,7 @@
   <br>
   <label for="langs">Llenguatges Utilitzats: </label><br>
   <select class="form-control" type="text" name="langs" #langs="ngModel" [(ngModel)]="project.langs" multiple required>
-    <option value="typescript">TypeScript</option>
-    <option value="javascript">JavaScript</option>
-    <option value="python">Python</option>
-    <option value="php">PhP</option>
-    <option value="angular">Angular</option>
+    <option *ngFor="let llengua of llenguatges" value="{{llengua}}">{{llengua}}</option>
   </select><br>
   <span *ngIf="langs.touched && !langs.valid">
     <p style="color:red;">Aquest paràmetre és obligatori.</p>
