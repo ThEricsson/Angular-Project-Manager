@@ -1,4 +1,8 @@
-# PrAngularEr
+# About
+
+Este proyecto consiste en un FrontEnd Angular, un BackEnd  api rest NodeJS y una DB NoSQL MongoDB, el objetivo principal de este proyecto es crear una herramienta de gestión de proyectos.
+
+# Angular-Project-Manager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
 
