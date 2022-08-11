@@ -6,21 +6,21 @@
 <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
   <label for="nom">Nom: </label><br>
   <input class="form-control" type="text" name="name" #name="ngModel" [(ngModel)]="project.name" required
-    pattern="[a-zA-Z0-9 ]+"><br>
+    pattern="[a-zA-ZÀ-ÿ0-9,. ]+"><br>
   <span *ngIf="name.touched && !name.valid">
     <p style="color:red;">Aquest paràmetre és obligatori.</p>
   </span>
   <br>
   <label for="descripcio">Descripcio: </label><br>
   <input class="form-control" type="text" name="descripcio" #descripcio="ngModel" [(ngModel)]="project.description"
-    required pattern="[a-zA-Z0-9 ]+"><br>
+    required pattern="[a-zA-ZÀ-ÿ0-9,. ]+"><br>
   <span *ngIf="descripcio.touched && !descripcio.valid">
     <p style="color:red;">Aquest paràmetre és obligatori.</p>
   </span>
   <br>
   <label for="category">Categoria: </label><br>
   <input class="form-control" type="text" name="category" #category="ngModel" [(ngModel)]="project.category" required
-    pattern="[a-zA-Z0-9 ]+"><br>
+    pattern="[a-zA-ZÀ-ÿ0-9,. ]+"><br>
   <span *ngIf="category.touched && !category.valid">
     <p style="color:red;">Aquest paràmetre és obligatori.</p>
   </span>
