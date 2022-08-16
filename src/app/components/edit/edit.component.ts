@@ -34,7 +34,7 @@ export class EditComponent implements OnInit {
     private _route: ActivatedRoute,
     private _uploadService: UploadService
   ) { 
-    this.title = 'Editar proyecte'
+    this.title = 'Editar projecte'
   }
 
   //A l'inici recollim les dades amb la funció getProject
